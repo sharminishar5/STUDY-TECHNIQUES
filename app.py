@@ -4,29 +4,34 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Scientific Visualization", layout="wide")
 
-# Load dataset
-df = pd.read_csv("your_dataset.csv")  # replace with your file name
+# Load your dataset
+df = pd.read_csv("your_dataset.csv")  # replace with your CSV file name
 
-# Sidebar navigation
-page = st.sidebar.radio("Select Page", ["Page 1", "Page 2", "Page 3"])
+st.title("Scientific Visualization Dashboard")
 
-if page == "Page 1":
-    st.title("Page 1: Stress")
+# Create 3 tabs
+tab1, tab2, tab3 = st.tabs(["Stress", "Distraction", "Motivation"])
+
+# ---------- Tab 1 ----------
+with tab1:
+    st.header("Page 1: Stress Levels")
     if 'Stress' in df.columns:
         st.bar_chart(df['Stress'])
     else:
-        st.write("No Stress column found")
+        st.write("No 'Stress' column in dataset")
 
-elif page == "Page 2":
-    st.title("Page 2: Distraction")
+# ---------- Tab 2 ----------
+with tab2:
+    st.header("Page 2: Distraction Levels")
     if 'Distraction' in df.columns:
-        st.bar_chart(df['Distraction'])
+        st.line_chart(df['Distraction'])
     else:
-        st.write("No Distraction column found")
+        st.write("No 'Distraction' column in dataset")
 
-elif page == "Page 3":
-    st.title("Page 3: Motivation")
+# ---------- Tab 3 ----------
+with tab3:
+    st.header("Page 3: Motivation Levels")
     if 'Motivation' in df.columns:
-        st.bar_chart(df['Motivation'])
+        st.area_chart(df['Motivation'])
     else:
-        st.write("No Motivation column found")
+        st.write("No 'Motivation' column in dataset")
